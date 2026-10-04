@@ -5,6 +5,8 @@ export default defineNuxtConfig({
   modules: [
     '@norbiros/nuxt-auto-form',
     '@pinia/nuxt',
-    '@nuxt/eslint'
-  ]
+    '@nuxt/eslint',
+    '@nuxt/ui'
+  ],
+  css: ['~/assets/css/main.css']
 })
