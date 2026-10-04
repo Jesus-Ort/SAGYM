@@ -34,15 +34,13 @@
         </template>
 
         <template #right>
-            <UDropdownMenu :items="userMenu">
             <UButton
-                icon="i-lucide-user"
-                color="neutral"
+                icon="i-lucide-log-out"
+                color="error"
                 variant="ghost"
-                trailing-icon="i-lucide-chevron-down"
-                aria-label="Menú de usuario"
+                label="Cerrar sesión"
+                to="/"
             />
-            </UDropdownMenu>
         </template>
         </UHeader>
 
@@ -67,7 +65,7 @@
 </template>
 
 <script setup lang="ts">
-import type { NavigationMenuItem, DropdownMenuItem } from '@nuxt/ui'
+import type { NavigationMenuItem } from '@nuxt/ui'
 
 const navigation: NavigationMenuItem[] = [
     {
@@ -106,29 +104,5 @@ const navigation: NavigationMenuItem[] = [
         to: '/settings'
     }
 ]
-
-const userMenu: DropdownMenuItem[][] = [
-    [
-        {
-        label: 'Mi perfil',
-        icon: 'i-lucide-user',
-        to: '/perfil'
-        },
-        {
-        label: 'Configuración',
-        icon: 'i-lucide-settings',
-        to: '/settings'
-        }
-    ],
-    [
-        {
-        label: 'Cerrar sesión',
-        icon: 'i-lucide-log-out',
-        color: 'error',
-        // onSelect: logout
-        }
-    ]
-]
-
 
 </script>

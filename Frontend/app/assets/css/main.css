@@ -1,2 +1,66 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
+
+:root {
+  --ui-bg: var(--color-neutral-50);
+  --ui-bg-muted: var(--color-neutral-100);
+  --ui-bg-elevated: var(--color-surface);
+  --ui-bg-accented: var(--color-neutral-200);
+  --ui-bg-inverted: var(--color-primary-dark);
+
+  --ui-text-dimmed: var(--color-text-muted);
+  --ui-text-muted: var(--color-text-muted);
+  --ui-text-toned: var(--color-text-secondary);
+  --ui-text: var(--color-text-secondary);
+  --ui-text-highlighted: var(--color-text);
+  --ui-text-inverted: var(--color-surface);
+
+  --ui-border: var(--color-border);
+  --ui-border-muted: var(--color-border);
+  --ui-border-accented: var(--color-neutral-300);
+  --ui-border-inverted: var(--color-primary-dark);
+
+  --ui-primary: var(--color-primary);
+  --ui-success: var(--color-success);
+  --ui-warning: var(--color-warning);
+  --ui-error: var(--color-error);
+  --ui-info: var(--color-info);
+}
+
+@theme {
+  /* Brand colors - DESIGN.md */
+  --color-primary: #F97316;        /* Orange - Botones primarios, CTA */
+  --color-primary-dark: #171717;   /* Carbon - Sidebar, headers, texto principal */
+
+  /* Neutrales - DESIGN.md */
+  --color-neutral-50:  #F5F3EE;   /* Sand - bg-default */
+  --color-neutral-100: #EDE9E1;
+  --color-neutral-200: #E5E1D8;   /* Border - border-default */
+  --color-neutral-300: #D6D0C4;
+  --color-neutral-400: #A8A090;
+  --color-neutral-500: #737373;   /* Gray - texto muted */
+  --color-neutral-600: #5A5A5A;
+  --color-neutral-700: #404040;   /* Graphite - texto secundario */
+  --color-neutral-800: #2D2D2D;
+  --color-neutral-900: #171717;   /* Carbon - texto principal */
+  --color-neutral-950: #0A0A0A;
+
+  /* Alias semánticos para uso directo */
+  --color-surface: #FFFFFF;        /* White - Cards, modales */
+  --color-text: #171717;           /* Carbon */
+  --color-text-secondary: #404040; /* Graphite */
+  --color-text-muted: #737373;     /* Gray */
+  --color-border: #E5E1D8;         /* Border */
+
+  /* Semánticos */
+  --color-success: #16A34A;
+  --color-warning: #EAB308;
+  --color-error: #DC2626;
+  --color-info: #2563EB;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+}

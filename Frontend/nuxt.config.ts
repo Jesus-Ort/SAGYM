@@ -8,5 +8,10 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/ui'
   ],
-  css: ['~/assets/css/main.css']
+  css: ['~/assets/css/main.css'],
+  ui: {
+    theme: {
+      colors: ['primary', 'success', 'warning', 'error', 'info'],
+    },
+  },
 })
