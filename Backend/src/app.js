@@ -2,6 +2,7 @@ import cors from 'cors'
 import helmet from 'helmet'
 import rateLimit from 'express-rate-limit'
 import express from 'express';
+import authRoutes from './routes/auth.routes.js'
 
 const app = express();
 
@@ -24,7 +25,10 @@ const corsOptions = {
 }
 
 app.use(helmet())
-app.use(cors(corsOptions))
+app.use(cors({
+    ...corsOptions,
+    credentials: true
+}))
 app.use(express.json())
 
 const authLimiter = rateLimit({
@@ -44,9 +48,11 @@ const apiLimiter = rateLimit({
 })
 
 
+app.use('/api', apiLimiter)
+app.use('/api/auth', authLimiter, authRoutes)
 app.get('/api/', (req, res) => {
-    res.send('Hello World!');
-});
+    res.send('Hello World!')
+})
 
 app.listen(PORT, () => {
     console.log(`Example app listening on port ${PORT}`);
