@@ -9,6 +9,10 @@ export default defineNuxtConfig({
     '@nuxt/ui'
   ],
   css: ['~/assets/css/main.css'],
+  colorMode: {
+    preference: 'dark',
+    fallback: 'dark'
+  },
   ui: {
     theme: {
       colors: ['primary', 'success', 'warning', 'error', 'info'],

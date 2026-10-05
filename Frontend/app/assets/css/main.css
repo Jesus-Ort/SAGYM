@@ -27,6 +27,28 @@
   --ui-info: var(--color-info);
 }
 
+.dark {
+  color-scheme: dark;
+
+  --color-neutral-50: #171717;
+  --color-neutral-100: #2D2D2D;
+  --color-neutral-200: #404040;
+  --color-neutral-300: #5A5A5A;
+  --color-neutral-400: #737373;
+  --color-neutral-500: #A8A090;
+  --color-neutral-600: #D6D0C4;
+  --color-neutral-700: #E5E1D8;
+  --color-neutral-800: #EDE9E1;
+  --color-neutral-900: #F5F3EE;
+  --color-neutral-950: #FFFFFF;
+
+  --color-surface: #2D2D2D;
+  --color-text: #F5F3EE;
+  --color-text-secondary: #E5E1D8;
+  --color-text-muted: #A8A090;
+  --color-border: #404040;
+}
+
 @theme {
   /* Brand colors - DESIGN.md */
   --color-primary: #F97316;        /* Orange - Botones primarios, CTA */
