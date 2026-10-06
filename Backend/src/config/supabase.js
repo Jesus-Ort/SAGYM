@@ -12,8 +12,24 @@ export const supabase = createClient(
     supabaseAnonKey,
     {
         auth: {
-        autoRefreshToken: false,
-        persistSession: false,
+            autoRefreshToken: false,
+            persistSession: false,
+        },
+    }
+)
+
+export const createAuthenticatedSupabaseClient = (accessToken) => createClient(
+    supabaseUrl,
+    supabaseAnonKey,
+    {
+        global: {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        },
+        auth: {
+            autoRefreshToken: false,
+            persistSession: false,
         },
     }
 )

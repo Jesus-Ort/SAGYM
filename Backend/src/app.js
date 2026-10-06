@@ -3,6 +3,8 @@ import helmet from 'helmet'
 import rateLimit from 'express-rate-limit'
 import express from 'express';
 import authRoutes from './routes/auth.routes.js'
+import { requireAuth } from './middleware/require-auth.js'
+import { requireModuleAccess } from './middleware/require-module-access.js'
 
 const app = express();
 
@@ -50,6 +52,20 @@ const apiLimiter = rateLimit({
 
 app.use('/api', apiLimiter)
 app.use('/api/auth', authLimiter, authRoutes)
+
+const protectedModules = [
+    'clientes',
+    'mensualidades',
+    'pagos',
+    'entradas',
+    'usuarios',
+    'configuracion'
+]
+
+for (const module of protectedModules) {
+    app.use(`/api/${module}`, requireAuth, requireModuleAccess(module))
+}
+
 app.get('/api/', (req, res) => {
     res.send('Hello World!')
 })

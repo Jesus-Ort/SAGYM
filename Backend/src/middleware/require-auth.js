@@ -1,4 +1,7 @@
-import { supabase } from '../config/supabase.js'
+import {
+    createAuthenticatedSupabaseClient,
+    supabase
+} from '../config/supabase.js'
 import { getAuthCookies } from '../utils/auth-cookies.js'
 
 export const requireAuth = async (req, res, next) => {
@@ -27,6 +30,7 @@ export const requireAuth = async (req, res, next) => {
         }
 
         req.user = data.user
+        req.supabase = createAuthenticatedSupabaseClient(accessToken)
         return next()
     } catch (err) {
         console.error('Error inesperado al validar sesión:', err)
