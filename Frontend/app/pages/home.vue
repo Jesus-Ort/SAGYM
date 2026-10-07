@@ -1,12 +1,17 @@
 <template>
     <h1>Hi! - home </h1>
     <div>
-        <UButton @click="saludar" :loading="loading">
-        Probar GET /
+        <UButton @click="user" :loading="loading">
+        Probar GET /me
         </UButton>
 
-        <div v-if="error" class="text-red-500 mt-2">{{ error }}</div>
-        <div v-if="mensaje" class="text-green-500 mt-2">{{ mensaje }}</div>
+        <div v-if="data">
+            <p>ID: {{ data.user.id }}</p>
+            <p>Nombre: {{ data.user.nombre_completo }}</p>
+            <p>Gimnasio: {{ data.user.gimnasio_id }}</p>
+            <p>Rol: {{ data.user.rol }}</p>
+        </div>
+        
     </div>
 </template>
 <script setup>
@@ -14,17 +19,17 @@ import { ref } from 'vue'
 import { useApi } from '~/composables/useApi'
 
 const api = useApi()
-const mensaje = ref('')
+const data = ref('')
 const loading = ref(false)
 const error = ref(null)
 
-const saludar = async () => {
+const user = async () => {
     loading.value = true
     error.value = null
     
     try {
-        const respuesta = await api.get('/')
-        mensaje.value = respuesta
+        const respuesta = await api.get('/auth/me')
+        data.value = respuesta
     } catch (err) {
         if (err instanceof api.ApiError) {
         error.value = `Error ${err.status}: ${err.message}`

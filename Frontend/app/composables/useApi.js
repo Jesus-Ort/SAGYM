@@ -21,6 +21,7 @@ export const useApi = () => {
     const fetchOptions = {
       method,
       headers,
+      credentials: 'include',
       ...options,
     }
 

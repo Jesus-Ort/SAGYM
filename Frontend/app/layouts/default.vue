@@ -39,7 +39,8 @@
                 color="error"
                 variant="ghost"
                 label="Cerrar sesión"
-                to="/"
+                :loading = loading 
+                @click="logout"
             />
         </template>
         </UHeader>
@@ -64,10 +65,14 @@
     </div>
 </template>
 
-<script setup lang="ts">
-import type { NavigationMenuItem } from '@nuxt/ui'
+<script setup>
+import { useApi } from '~/composables/useApi'
 
-const navigation: NavigationMenuItem[] = [
+const api = useApi()
+const loading = ref(false)
+const error = ref('')
+
+const navigation = [
     {
         label: 'Inicio',
         icon: 'i-lucide-layout-dashboard',
@@ -104,5 +109,23 @@ const navigation: NavigationMenuItem[] = [
         to: '/settings'
     }
 ]
+
+const logout = async() => {
+    loading.value = true
+    error.value = ''
+
+    try {
+        await api.post('/auth/logout')
+        await navigateTo('/')
+        useToast().add({ title: 'Exito', description: 'Se ha cerrado la sesión', color: 'success' })
+    } catch (err) {
+        error.value = err instanceof api.ApiError
+        ? err.message
+        : 'No se pudo conectar con el servidor. Inténtalo nuevamente.'
+        useToast().add({ title: 'Error', description: error, color: 'error' })
+    } finally {
+        loading.value = false
+    }
+}
 
 </script>
