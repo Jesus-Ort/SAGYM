@@ -23,9 +23,8 @@ const saludar = async () => {
     error.value = null
     
     try {
-        // GET a la ruta / del backend
         const respuesta = await api.get('/')
-        mensaje.value = respuesta  // "Hello World!"
+        mensaje.value = respuesta
     } catch (err) {
         if (err instanceof api.ApiError) {
         error.value = `Error ${err.status}: ${err.message}`

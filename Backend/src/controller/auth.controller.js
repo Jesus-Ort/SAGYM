@@ -50,10 +50,6 @@ export const login = async (req, res) => {
 
         return res.json({
             message: 'Inicio de sesión exitoso',
-            user: {
-                id: data.user.id,
-                email: data.user.email
-            }
         })
     } catch (err) {
         console.error('Error inesperado al iniciar sesión:', err)
@@ -97,10 +93,6 @@ export const refreshToken = async (req, res) => {
 
         return res.json({
             message: 'Sesión renovada',
-            user: {
-                id: data.user.id,
-                email: data.user.email
-            }
         })
     } catch (err) {
         console.error('Error inesperado al renovar sesión:', err)
@@ -112,13 +104,47 @@ export const refreshToken = async (req, res) => {
 }
 
 export const me = async (req,res) =>{
-    return res.json({
-        user: {
-            id: req.user.id,
-            email: req.user.email
+        try {            
+
+        const user_id = req.user.id
+
+        const { data: profile, error } = await supabase
+            .from('perfiles')
+            .select(`
+                id,
+                gimnasio_id,
+                nombre_completo,
+                rol,
+                is_active
+                `)
+            .eq('id', user_id)
+            .single()
+
+        if (!profile){
+            return res.status(404).json({
+                message: 'Perfil del usuario no encontrado'
+            })
         }
-    })
+
+        if (error) {
+            console.error( 'Error de Supabase al obtener el perfil:', error.message )
+            return res.status(500).json({
+                message: 'No se pudo obtener la información del usuario'
+            })
+        }
+
+        return res.status(200).json({
+                message: "Perfil del usuario encontrado",
+                user: profile
+            })
+        } catch (err) {
+        console.error('Error inesperado al obtener el usuario:', err)
+        return res.status(500).json({
+            message: 'Error inesperado al obtener el usuario'
+        })
+    }
 }
+
 
 export const logout = async (req, res) => {
     clearAuthCookies(res)
