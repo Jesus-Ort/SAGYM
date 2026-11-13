@@ -37,6 +37,7 @@ const schema = z.object({
         input: {
             props: {
             placeholder: 'Contraseña',
+            type: 'password'
             },
         },
         }),
